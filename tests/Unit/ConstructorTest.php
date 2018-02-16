@@ -1,9 +1,9 @@
 <?php
 
-namespace SixCRM\Test;
+namespace SixCRM\Test\Unit;
 
 use SixCRM\Transaction;
-use SixCRM\Test\BaseTest;
+use SixCRM\Test\Unit\BaseTest;
 
 /**
  *

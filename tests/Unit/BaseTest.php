@@ -1,6 +1,6 @@
 <?php
 
-namespace SixCRM\Test;
+namespace SixCRM\Test\Unit;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -44,8 +44,7 @@ abstract class BaseTest extends TestCase
                 ],
                 'api_base_path'     => 'https://test-base-path/',
                 'campaign'          => 'deadbeef-0000-0000-0000-123456789abc',
-                'secret_key'        => 'ca11a1b1c0d300000000000000==',
-                'signature'         => '1234567890123456789012345678901234567890'
+                'secret_key'        => 'ca11a1b1c0d300000000000000=='
             ],
             false,
             $client

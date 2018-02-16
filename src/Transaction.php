@@ -10,7 +10,6 @@ class Transaction {
     private $access_key;
     private $affiliates;
     private $account;
-    private $signature;
     private $campaign;
     private $token;
     private $client;
@@ -34,13 +33,12 @@ class Transaction {
 
 		$this -> set('affiliates',      $config['affiliates']);
 		$this -> set('account',         $config['account']);
-		$this -> set('signature',       $config['signature']);
 		$this -> set('campaign',        $config['campaign']);
 
 		$this -> set('client',          $client);
 
         if (!$this->client) {
-            $client = new GuzzleClient();
+            $this->client = new GuzzleClient();
         }
 
 		$this->getToken();
