@@ -8,7 +8,7 @@ use SixCRM\Test\Integration\BaseTest;
 /**
  *
  */
-class TrueTest extends BaseTest
+class ConstructorTest extends BaseTest
 {
 
     /**
@@ -17,8 +17,6 @@ class TrueTest extends BaseTest
       */
     public function testTrue()
     {
-
-        $this->assertTrue(true);
 
 
         $transaction = $this->createTransaction();
