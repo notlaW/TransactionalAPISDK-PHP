@@ -27,7 +27,7 @@ abstract class BaseTest extends TestCase
     /**
      *
      */
-    protected function createBasicTransaction($client, $session = true)
+    protected function createBasicTransaction(Client $client, $session = true)
     {
 
         if ($session) {

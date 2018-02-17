@@ -14,10 +14,13 @@ class Transaction {
     private $token;
     private $client;
 
+    /**
+      *
+      */
 	function __construct(
         $config = array(),
         $session = false,
-        $client = false
+        GuzzleClient $client = null
     ){
 
         if ($session) {
@@ -363,10 +366,7 @@ class Transaction {
       */
 	private function getRequestTime()
     {
-
-		//return time()*1000;
-		return '1491243564378';
-
+		return time()*1000;
 	}
 }
 
