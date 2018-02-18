@@ -72,10 +72,7 @@ class ConstructorTest extends BaseTest
       */
     public function testConstructWithSessionToken()
     {
-        $client = $this->mockGuzzle([
-            [200, [], json_encode(['response'   => 'testing-token'])]
-        ]);
-
+        $client = $this->mockGuzzle([]);
         $transaction = $this->createBasicTransaction($client);
 
         // --------------------------------------------------------------------

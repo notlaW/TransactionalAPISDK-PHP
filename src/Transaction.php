@@ -2,6 +2,7 @@
 namespace SixCRM;
 
 use GuzzleHttp\Client as GuzzleClient;
+use SixCRM\Form\Helper as SixFormHelper;
 
 class Transaction {
 
@@ -13,6 +14,7 @@ class Transaction {
     private $campaign;
     private $token;
     private $client;
+    private $helper;
 
     /**
       *
@@ -39,6 +41,8 @@ class Transaction {
 		$this -> set('campaign',        $config['campaign']);
 
 		$this -> set('client',          $client);
+
+        $this->helper = new SixFormHelper();
 
         if (!$this->client) {
             $this->client = new GuzzleClient();
@@ -196,6 +200,15 @@ class Transaction {
 		return $response;
 
 	}
+
+    public function parseCustomer($formInput = array())
+    {
+        return $this->helper->parseCustomer($formInput);
+    }
+    public function parseCreditCard($formInput = array())
+    {
+        return $this->helper->parseCreditCard($formInput);
+    }
 
     // ------------------------------------------------------------------------
 
