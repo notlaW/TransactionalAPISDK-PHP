@@ -100,24 +100,21 @@ class Transaction {
     /**
       *
       */
-	public function createLead($lead = array())
+	public function createLead($customer = array())
     {
 
-		$token = $this -> getToken();
-		$account = $this -> get('account');
+        $lead = [
+            'customer'      => $customer,
+            'campaign'      => $this->get('campaign'),
+            'affiliates'    => $this->get('affiliates'),
+        ];
 
-		$lead['campaign'] = $this -> get('campaign');
-		$lead['affiliates'] = $this -> get('affiliates');
+		$account = $this -> get('account');
 
 		$response = $this -> performPost(
 			'lead/create/'.$account,
-			array(
-				'Content-Type: application/json',
-				'Authorization: '.$token
-			),
 			$lead
 		);
-
 
 		//Technical Debt:  This should be a seperate function
 		$decoded_response = json_decode($response);
@@ -141,10 +138,6 @@ class Transaction {
 
 		$response = $this -> performPost(
 			'order/create/'.$account,
-			array(
-				'Content-Type: application/json',
-				'Authorization: '.$token
-			),
 			$order
 		);
 
@@ -166,10 +159,6 @@ class Transaction {
 
 		$response = $this -> performPost(
 			'order/create/'.$account,
-			array(
-				'Content-Type: application/json',
-				'Authorization: '.$token
-			),
 			$upsell
 		);
 
@@ -304,9 +293,9 @@ class Transaction {
       */
 	private function performPost($endpoint, $body)
     {
-		$fqe = $this -> getFullyQualifiedEndpoint($endpoint);
-
-        $res = $this->client->request('POST', $fqe,
+        $response = $this->client->request(
+            'POST',
+            $this->getFullyQualifiedEndpoint($endpoint),
             [
                 'headers'   => [
                     'Content-Type'  => 'application/json',
@@ -316,7 +305,7 @@ class Transaction {
             ]
         );
 
-        return $res->getBody();
+        return $response->getBody();
 	}
 
     /**

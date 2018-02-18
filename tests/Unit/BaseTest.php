@@ -19,6 +19,19 @@ abstract class BaseTest extends TestCase
 {
     protected $history = [];
 
+    const TRANSACTION = [
+        'access_key'        => 'fakeaccesskeyabcefghijklmnop',
+        'account'           => 'badcafe0-0000-0000-0000-123456789abc',
+        'affiliates'        => [
+            'affiliate'         => 'AFFILIATE',
+            'subaffiliate_1'    => 'SUBAFFILIA',
+        ],
+        'api_base_path'     => 'https://test-base-path/',
+        'campaign'          => 'deadbeef-0000-0000-0000-123456789abc',
+        'secret_key'        => 'ca11a1b1c0d300000000000000=='
+
+    ];
+
     public function setup()
     {
 
@@ -35,17 +48,7 @@ abstract class BaseTest extends TestCase
         }
 
         $transaction = new Transaction(
-            [
-                'access_key'        => 'fakeaccesskeyabcefghijklmnop',
-                'account'           => 'badcafe0-0000-0000-0000-123456789abc',
-                'affiliates'        => [
-                    'affiliate'         => 'AFFILIATE',
-                    'subaffiliate_1'    => 'SUBAFFILIA',
-                ],
-                'api_base_path'     => 'https://test-base-path/',
-                'campaign'          => 'deadbeef-0000-0000-0000-123456789abc',
-                'secret_key'        => 'ca11a1b1c0d300000000000000=='
-            ],
+            self::TRANSACTION,
             false,
             $client
         );
