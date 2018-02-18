@@ -34,7 +34,7 @@ abstract class BaseTest extends TestCase
             true
         );
 
-        $transaction = new Transaction($config);
+        $transaction = new Transaction($config, false);
 
         return $transaction;
     }

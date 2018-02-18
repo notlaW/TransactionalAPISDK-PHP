@@ -15,12 +15,9 @@ class ConstructorTest extends BaseTest
       *
       *
       */
-    public function testTrue()
+    public function testConstructor()
     {
-
         $transaction = $this->createTransaction();
-
-
 
 
     }

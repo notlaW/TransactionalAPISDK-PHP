@@ -1,5 +1,8 @@
 test:
-	vendor/bin/phpunit --testsuite=unit $(TEST)
+	./tests/run-unit-via-docker.sh
+
+test-integration:
+	./tests/run-integration-via-docker.sh
 
 package:
 	php build/packager.php

@@ -44,26 +44,24 @@ class HelperTest extends BaseTest
 
         $this->assertEquals(
             [
-                'customer' => [
-                    'firstname'     => 'first',
-                    'lastname'      => 'last',
-                    'email'         => 'email',
-                    'phone'         => 'phone',
-                    'billing'       => [
-                        'line1'         => 'ship1',
-                        'city'          => 'city',
-                        'state'         => 'state',
-                        'zip'           => 'postal',
-                        'country'       => 'US',
-                    ],
-                    'address'       => [
-                        'line1'         => 'ship1',
-                        'line2'         => 'ship2',
-                        'city'          => 'city',
-                        'state'         => 'state',
-                        'zip'           => 'postal',
-                        'country'       => 'US',
-                    ]
+                'firstname'     => 'first',
+                'lastname'      => 'last',
+                'email'         => 'email',
+                'phone'         => 'phone',
+                'billing'       => [
+                    'line1'         => 'ship1',
+                    'city'          => 'city',
+                    'state'         => 'state',
+                    'zip'           => 'postal',
+                    'country'       => 'US',
+                ],
+                'address'       => [
+                    'line1'         => 'ship1',
+                    'line2'         => 'ship2',
+                    'city'          => 'city',
+                    'state'         => 'state',
+                    'zip'           => 'postal',
+                    'country'       => 'US',
                 ]
             ],
             $customer
