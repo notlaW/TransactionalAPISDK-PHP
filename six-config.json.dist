@@ -1,0 +1,23 @@
+{
+
+    "access_key": "--> access key <--",
+    "secret_key": "--> access key <--",
+    "api_base_path": "https://development-api.sixcrm.com/",
+    "account": "--> account uuid <--",
+    "campaign": "--> campaing uuid <--",
+    "product_schedules": [
+        "--> product schedule uuid <--"
+    ],
+    "upsell_product_schedules": [
+        "--> product schedule uuid <--"
+    ],
+    "affiliates": {
+        "affiliate": "--> affiliate id <--",
+        "subaffiliate_1": "--> sub-affiliate id <--",
+        "subaffiliate_2": "--> sub-affiliate id <--",
+        "subaffiliate_3": "--> sub-affiliate id <--",
+        "subaffiliate_4": "--> sub-affiliate id <--",
+        "subaffiliate_5": "--> sub-affiliate id <--",
+        "cid": "--> cid <--"
+    }
+}
