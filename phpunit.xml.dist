@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./tests/bootstrap.php"
+         defaultTestSuite="unit"
          colors="true">
 
     <testsuites>
         <testsuite name="unit">
             <directory suffix="Test.php">tests/</directory>
-            <exclude>tests/Integ</exclude>
+            <exclude>tests/Integration</exclude>
         </testsuite>
         <testsuite name="integ">
             <directory suffix="Test.php">tests/Integ</directory>
