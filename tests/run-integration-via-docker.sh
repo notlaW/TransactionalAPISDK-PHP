@@ -21,6 +21,6 @@ docker run \
     --volume $__here/../:/tests \
     --workdir="/tests" \
     php:5.6-cli-alpine3.4 \
-    ./vendor/bin/phpunit --verbose --debug --filter=Integration
+    ./vendor/bin/phpunit --verbose --debug --filter=Integration --testsuite=integration
 
 
