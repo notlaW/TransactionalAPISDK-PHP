@@ -14,6 +14,7 @@ class HelperTest extends BaseTest
         'firstName'         => 'first',
         'lastName'          => 'last',
         'shipAddress1'      => 'ship1',
+        'shipAddress2'      => 'ship2',
         'shipCity'          => 'city',
         'shipPostalCode'    => 'postal',
         'shipState'         => 'state',
@@ -57,6 +58,7 @@ class HelperTest extends BaseTest
                     ],
                     'address'       => [
                         'line1'         => 'ship1',
+                        'line2'         => 'ship2',
                         'city'          => 'city',
                         'state'         => 'state',
                         'zip'           => 'postal',

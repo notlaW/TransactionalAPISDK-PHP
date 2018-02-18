@@ -21,7 +21,7 @@ class Transaction {
       */
 	function __construct(
         $config = array(),
-        $session = false,
+        $session = true,
         GuzzleClient $client = null
     ){
 

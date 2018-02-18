@@ -14,11 +14,13 @@ class Helper {
         $firstName  = isset($formInput['firstName']) ? $formInput['firstName'] : null;
         $lastName   = isset($formInput['lastName']) ? $formInput['lastName'] : null;
         $address1   = isset($formInput['shipAddress1']) ? $formInput['shipAddress1'] : null;
+        $address2   = isset($formInput['shipAddress2']) ? $formInput['shipAddress2'] : null;
         $city       = isset($formInput['shipCity']) ? $formInput['shipCity'] : null;
         $zip        = isset($formInput['shipPostalCode']) ? $formInput['shipPostalCode'] : null;
         $state      = isset($formInput['shipState']) ? $formInput['shipState'] : null;
         $phone      = isset($formInput['phoneNumber']) ? $formInput['phoneNumber'] : null;
         $email      = isset($formInput['emailAddress']) ? $formInput['emailAddress'] : null;
+        $country    = isset($formInput['shipCountry']) ? $formInput['shipCountry'] : 'US';
 
         if (    null !== $firstName &&
                 null !== $lastName &&
@@ -27,29 +29,28 @@ class Helper {
                 null !== $zip &&
                 null !== $state &&
                 null !== $phone &&
-                null !== $email)
-        {
+                null !== $email
+        ) {
 
             $customer = array(
-                'customer' => array(
-                    'firstname' => $firstName,
-                    'lastname' => $lastName,
-                    'email' => $email,
-                    'phone' => $phone,
-                    'billing' => array(
-                        'line1' => $address1,
-                        'city' => $city,
-                        'state' => $state,
-                        'zip' => $zip,
-                        'country' => 'US'
-                    ),
-                    'address' => array(
-                        'line1' => $address1,
-                        'city' => $city,
-                        'state' => $state,
-                        'zip' => $zip,
-                        'country' => 'US'
-                    )
+                'firstname' => $firstName,
+                'lastname' => $lastName,
+                'email' => $email,
+                'phone' => $phone,
+                'billing' => array(
+                    'line1' => $address1,
+                    'city' => $city,
+                    'state' => $state,
+                    'zip' => $zip,
+                    'country' => $country,
+                ),
+                'address' => array(
+                    'line1' => $address1,
+                    'line2' => $address2,
+                    'city' => $city,
+                    'state' => $state,
+                    'zip' => $zip,
+                    'country' => $country
                 )
             );
 
