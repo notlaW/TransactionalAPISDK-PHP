@@ -8,6 +8,8 @@ use GuzzleHttp\Exception\RequestException;
 
 class Transaction {
 
+    const MAX_TOKEN_AGE = 14400;
+
     private $api_base_path;
     private $secret_key;
     private $access_key;
@@ -61,11 +63,17 @@ class Transaction {
 
 		if (is_null($this->token)) {
 
-			if (isset($_SESSION['token'])){
+			//if (    (isset($_SESSION['token']))){
+			if (    (isset($_SESSION['token'])) &&
+                    (isset($_SESSION['token_acquisition_time'])) &&
+                    ($_SESSION['token_acquisition_time'] + self::MAX_TOKEN_AGE > time()) ){
+
+
                 $this->token = $_SESSION['token'];
 			}
             else{
                 $_SESSION['token'] = $this->token = $this->acquireToken();
+                $_SESSION['token_acquisition_time'] = time();
             }
         }
 

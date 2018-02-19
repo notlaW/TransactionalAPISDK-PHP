@@ -17,7 +17,7 @@ class ConstructorTest extends BaseTest
     public function testConstruct()
     {
         $client = $this->mockGuzzle([
-            [200, [], json_encode(['response'   => 'testing-token'])]
+            [200, [], json_encode(['response'   => 'token-via-response'])]
         ]);
 
         $transaction = $this->createBasicTransaction($client, false);
@@ -92,4 +92,40 @@ class ConstructorTest extends BaseTest
             $token
         );
     }
+
+    /**
+      * Constructs a Transaction and validates that the token is
+      * taken from the session
+      */
+    public function testConstructWithStaleSessionToken()
+    {
+
+        $_SESSION['token'] = 'stale-token-via-session';
+        $_SESSION['token_acquisition_time'] = time() - 86400;
+
+        $client = $this->mockGuzzle([
+            [200, [], json_encode(['response'   => 'token-via-response'])]
+        ]);
+
+        $transaction = $this->createBasicTransaction($client, false);
+
+        // --------------------------------------------------------------------
+        // validation
+
+        $requests = $this->getMockHistory();
+        $token = $transaction->getToken();
+
+        // one request only
+        $this->assertCount(
+            1,
+            $requests
+        );
+
+        $this->assertEquals(
+            'token-via-response',
+            $token
+        );
+    }
+
+
 }

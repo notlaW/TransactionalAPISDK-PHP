@@ -45,6 +45,7 @@ abstract class BaseTest extends TestCase
 
         if ($session) {
             $_SESSION['token'] = 'token-via-session';
+            $_SESSION['token_acquisition_time'] = time();
         }
 
         $transaction = new Transaction(
