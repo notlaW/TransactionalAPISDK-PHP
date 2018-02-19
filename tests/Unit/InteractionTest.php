@@ -58,6 +58,12 @@ class InteractionTest extends BaseTest
 
         $requests = $this->getMockHistory();
 
+        // number of requests
+        $this->assertCount(
+            1,
+            $requests
+        );
+
         $this->assertEquals(
             'some-session-id',
             $_SESSION['session_id']
@@ -112,18 +118,78 @@ class InteractionTest extends BaseTest
         $transaction = $this->createBasicTransaction($client, true);
 
         $success = $transaction->createOrder([
-            'number'        => 12345,
-            'expiration'    => 121970,
-            'ccv'           => 321,
+            'creditcard'    => [
+                'address'       => [
+                    'line1'         => 'ship1',
+                    'line2'         => 'ship2',
+                    'city'          => 'city',
+                    'state'         => 'state',
+                    'zip'           => 'postal',
+                    'country'       => 'US',
+                ],
+                'number'        => '123412341234',
+                'ccv'           => '321',
+                'expiration'    => '022019',
+                'name'          => 'Joe Blow',
+            ],
+            'transaction_subtype'   => 'checkout',
+            'products'              => 'some product',
         ]);
 
         // --------------------------------------------------------------------
         // validate
 
-
         $requests = $this->getMockHistory();
 
-//        print_r($requests);
+        // number of requests
+        $this->assertCount(
+            1,
+            $requests
+        );
 
+        $request = $requests[0];
+
+        $headers = $request['headers'];
+        unset($request['headers']);
+
+        // validate auth headers
+        $this->assertCount(
+            1,
+            $headers['Authorization']
+        );
+        $this->assertEquals(
+            'token-via-session',
+            $headers['Authorization'][0]
+        );
+
+        // validate request body
+        $this->assertEquals(
+            [
+                'uri'       => 'https://test-base-path/order/create/badcafe0-0000-0000-0000-123456789abc',
+                'method'    => 'POST',
+                'request'   => [
+
+                    'session'       => 'some-session-id',
+                    'creditcard'    => [
+                        'address'   => [
+                            'line1'     => 'ship1',
+                            'line2'     => 'ship2',
+                            'city'      => 'city',
+                            'state'     => 'state',
+                            'zip'       => 'postal',
+                            'country'   => 'US',
+                        ],
+                        'number'        => '123412341234',
+                        'ccv'           => '321',
+                        'expiration'    => '022019',
+                        'name'          => 'Joe Blow',
+                    ],
+                    'transaction_subtype'   => 'checkout',
+                    'products'              => 'some product'
+                ]
+            ],
+
+            $request
+        );
     }
 }

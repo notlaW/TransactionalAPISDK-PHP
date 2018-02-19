@@ -94,7 +94,8 @@ class Transaction {
             ]
         );
 
-        return json_decode($response->getBody());
+        $body = json_decode($response->getBody(), true);
+        return $body['response'];
 	}
 
     /**
@@ -130,13 +131,12 @@ class Transaction {
 	public function createOrder($order =  array())
     {
 
-		$token = $this -> getToken();
+		$token      = $this->getToken();
+		$account    = $this->get('account');
 
-		$account = $this -> get('account');
+		$order['session'] = $this->getSessionId();
 
-		$order['session'] =  $this -> getSessionId();
-
-		$response = $this -> performPost(
+		$response = $this->performPost(
 			'order/create/'.$account,
 			$order
 		);
