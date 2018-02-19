@@ -3,6 +3,8 @@ namespace SixCRM;
 
 use GuzzleHttp\Client as GuzzleClient;
 use SixCRM\Form\Helper as SixFormHelper;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\RequestException;
 
 class Transaction {
 
@@ -293,19 +295,35 @@ class Transaction {
       */
 	private function performPost($endpoint, $body)
     {
-        $response = $this->client->request(
-            'POST',
-            $this->getFullyQualifiedEndpoint($endpoint),
-            [
-                'headers'   => [
-                    'Content-Type'  => 'application/json',
-                    'Authorization' => $this->getToken()
-                ],
-                'json'      => $body
-            ]
-        );
 
-        return $response->getBody();
+        try{
+            $response = $this->client->request(
+                'POST',
+                $this->getFullyQualifiedEndpoint($endpoint),
+                [
+                    'headers'   => [
+                        'Content-Type'  => 'application/json',
+                        'Authorization' => $this->getToken()
+                    ],
+                    'json'      => $body
+                ]
+            );
+
+            return $response->getBody();
+
+        } catch (RequestException $e) {
+            print "Failure on POST\n";
+            print "JSON:\n";
+            print json_encode($body, JSON_PRETTY_PRINT);
+
+            print "full body:\n";
+            echo Psr7\str($e->getRequest());
+            if ($e->hasResponse()) {
+                echo Psr7\str($e->getResponse());
+            }
+        }
+
+
 	}
 
     /**
