@@ -312,15 +312,18 @@ class Transaction {
             return $response->getBody();
 
         } catch (RequestException $e) {
+            print "<pre>\n";
             print "Failure on POST\n";
             print "JSON:\n";
             print json_encode($body, JSON_PRETTY_PRINT);
 
-            print "full body:\n";
-            echo Psr7\str($e->getRequest());
+            print "\n\nfull body:\n";
+            print Psr7\str($e->getRequest());
             if ($e->hasResponse()) {
                 echo Psr7\str($e->getResponse());
             }
+            print "\nend -----------------------------------------------------\n";
+            print "</pre>\n";
         }
 
 
